@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
@@ -19,8 +17,11 @@ public class Rol extends Domain {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "rol")
-    private List<Usuario> usuarios;
-
-    // Getters y Setters
+    @Override
+    public String toString() {
+        return "Rol{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

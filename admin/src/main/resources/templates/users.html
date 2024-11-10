@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+<body>
+    <div th:replace="~{fragments/navbar.html}"></div>
+    <h2>Crear Usuario</h2>
+    <form th:action="@{/user/save}" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        <label for="rol">Rol:</label>
+        <select id="rol.id" name="rol.id" required>
+            <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
+        </select>
+        <button type="submit">Guardar</button>
+    </form>
+    <h2>Buscar Usuarios</h2>
+    <form th:action="@{/user/search}" method="GET">
+        <label for="keyword">Email del Usuario:</label>
+        <input type="text" id="keyword" name="keyword">
+        <button type="submit">Buscar</button>
+    </form>
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <form th:action="@{/user/edit/{id}(id=${user.id})}" method="POST">
+                <input type="hidden" name="_method" value="PUT"/>
+                <td th:text="${user.id}"></td>
+                <td><input type="text" name="user.nombre" th:value="${user.nombre}" required></td>
+                <td><input type="email" name="user.email" th:value="${user.email}" required></td>
+                <td>
+                    <select  name="rol.id" required>
+                        <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"
+                                th:selected="${rol.id == user.rol.id}"></option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit">Guardar Cambios</button>
+                    <a th:href="@{/user/delete/{id}(id=${user.id})}">Eliminar</a>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="~{fragments/footer.html}"></div>
+</body>
+</html>

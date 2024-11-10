@@ -1,7 +1,6 @@
 package com.manuellarrota.admin.entities;
 
 
-
 import com.manuellarrota.admin.entities.common.Domain;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -22,15 +21,24 @@ public class Usuario extends Domain {
     private String email;
     private String contrasena;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Bitacora> bitacoras;
 
-    // Getters y Setters
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                '}';
+    }
 }

@@ -22,6 +22,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({NoResourceFoundException.class})
     public String noResourceFound(Exception ex, Model model) {
-        return "error/404";  // Esto redirige a la página error.html
+        return "error/404";  // Esto redirige a la página 404.html
     }
 }

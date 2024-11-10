@@ -1,43 +1,74 @@
 package com.manuellarrota.admin.controllers;
 
 import com.manuellarrota.admin.entities.Usuario;
+import com.manuellarrota.admin.services.MenuService;
+import com.manuellarrota.admin.services.RolService;
 import com.manuellarrota.admin.services.UsuarioService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@Slf4j
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
-    UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+    private final MenuService menuService;
+    private final RolService rolService;
+    private static final String USER_VIEW = "users";
 
     @Autowired
-    public UserController(UsuarioService usuarioService) {
+    public UserController(UsuarioService usuarioService, MenuService menuService, RolService rolService) {
         this.usuarioService = usuarioService;
+        this.menuService = menuService;
+        this.rolService = rolService;
     }
 
-    @GetMapping("/usuarios")
+    @GetMapping
     public String listaUsuarios(Model model) {
-
-        List<Usuario> usuarios = usuarioService.findAll();
-        model.addAttribute("usuarios", usuarios);
-        return "usuarios/listaUsuarios";
+        cargarDatosPagina(model);
+        return USER_VIEW;
     }
 
-    @GetMapping("/usuarios/crear")
-    public String crearUsuarioForm(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        return "usuarios/crearUsuario";
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam("keyword") String keyword) {
+        model.addAttribute("roles", rolService.findAll());
+        model.addAttribute("userMenu", menuService.findAll());
+        model.addAttribute("userList", usuarioService.findLike(keyword));
+        return USER_VIEW;
     }
 
-    @PostMapping("/usuarios/guardar")
-    public String guardarUsuario(@ModelAttribute Usuario usuario) {
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id, Model model) {
+        usuarioService.delete(id);
+        cargarDatosPagina(model);
+        return USER_VIEW;
+    }
+
+    @PostMapping("/save")
+    public String guardarUsuario(@ModelAttribute Usuario usuario, Model model) {
+        log.info("Guardando USARIOO");
+        log.info(usuario.toString());
         usuarioService.save(usuario);
-        return "redirect:/usuarios";
+        cargarDatosPagina(model);
+        return USER_VIEW;
+    }
+
+    @PutMapping("/edit/{id}")
+    public String editarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario, Model model) {
+        log.info("EDITAR USARIOO");
+        log.info(usuario.toString());
+        usuarioService.update(id, usuario);
+        cargarDatosPagina(model);
+        return USER_VIEW;
+    }
+
+    void cargarDatosPagina(Model model){
+        model.addAttribute("roles", rolService.findAll());
+        model.addAttribute("userMenu", menuService.findAll());
+        model.addAttribute("userList", usuarioService.findAll());
     }
 }

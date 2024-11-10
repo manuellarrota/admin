@@ -8,7 +8,6 @@ public class AuthController {
     // Página de login personalizada
     @GetMapping("/login")
     public String loginPage() {
-
         return "login";  // Devuelve el archivo login.html
     }
 

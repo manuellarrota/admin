@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <nav class="navbar">
     <ul>
-        <li><a th:href="@{/dashboard}">Dashboard</a></li>
-        <li><a th:href="@{/usuarios}">Usuarios</a></li>
-        <li><a th:href="@{/productos}">Productos</a></li>
-        <li><a th:href="@{/logout}">Cerrar sesión</a></li>
+        <th:block th:each="optionMenu : ${userMenu}">
+        <li><a th:href="@{${optionMenu.url}}" th:text="${optionMenu.label}"></a></li>
+        </th:block>
+        <li>
+            <a th:href="@{/logout}" th:text="'Cerrar sesión'"></a>
+        </li>
     </ul>
 </nav>
