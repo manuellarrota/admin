@@ -1,0 +1,26 @@
+package com.manuellarrota.admin.entities;
+
+
+import com.manuellarrota.admin.entities.common.Domain;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = false)
+@Data
+@Entity
+@Table(name = "rol")
+public class Rol extends Domain {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @OneToMany(mappedBy = "rol")
+    private List<Usuario> usuarios;
+
+    // Getters y Setters
+}

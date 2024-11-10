@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb  # URL de la base de datos H2 en memoria
+    driver-class-name: org.h2.Driver  # Clase del controlador JDBC para H2
+    username: sa  # Usuario de la base de datos (por defecto, "sa" para H2)
+    password:  # Contraseña de la base de datos (por defecto, no hay contraseña para H2)
+  h2:
+    console:
+      enabled: true  # Habilitar la consola H2 (opcional, para acceder a la consola web)
+      path: /h2-console  # Ruta de acceso a la consola H2
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      show_sql: false
+    defer-datasource-initialization: true
+

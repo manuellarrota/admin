@@ -1,0 +1,10 @@
+package ${rutaPaquetes}.repositories;
+
+import ${rutaPaquetes}.entities.${nombreClase};
+import com.manu.crud_generator.utils.repository.CustomCrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ${nombreClase}Repository extends CustomCrudRepository<${nombreClase}> {
+
+}

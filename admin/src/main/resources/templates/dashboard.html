@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+<div th:replace="~{fragments/navbar.html}"></div>
+<div class="dashboard">
+    <h2>Bienvenido, Administrador</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Usuarios</h3>
+            <p>15 nuevos usuarios este mes</p>
+            <a href="/usuarios">Ver todos los usuarios</a>
+        </div>
+        <div class="card">
+            <h3>Productos</h3>
+            <p>100 productos en inventario</p>
+            <a href="/productos">Ver productos</a>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer.html}"></div>
+</body>
+</html>
