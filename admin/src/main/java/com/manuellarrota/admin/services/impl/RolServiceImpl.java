@@ -25,6 +25,11 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
+    public List<Rol> findLike(String keyword) {
+        return rolRepository.findByNombreContaining(keyword);
+    }
+
+    @Override
     public Optional<Rol> findById(Long id) {
         return rolRepository.findById(id);
     }
@@ -32,6 +37,16 @@ public class RolServiceImpl implements RolService {
     @Override
     public Rol save(Rol rol) {
         return rolRepository.save(rol);
+    }
+
+    @Override
+    public Rol update(Long id, Rol rol) {
+        Optional<Rol> rolOptional = rolRepository.findById(id);
+        if(rolOptional.isPresent()){
+            rolOptional.get().setNombre(rol.getNombre());
+            return rolRepository.save(rolOptional.get());
+        }
+        return null;
     }
 
     @Override

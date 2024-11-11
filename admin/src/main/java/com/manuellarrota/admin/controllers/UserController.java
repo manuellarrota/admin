@@ -45,7 +45,7 @@ public class UserController {
     public String delete(@PathVariable("id") Long id, Model model) {
         usuarioService.delete(id);
         cargarDatosPagina(model);
-        return USER_VIEW;
+        return "redirect:/user";
     }
 
     @PostMapping("/save")
@@ -54,7 +54,8 @@ public class UserController {
         log.info(usuario.toString());
         usuarioService.save(usuario);
         cargarDatosPagina(model);
-        return USER_VIEW;
+        return "redirect:/user";
+
     }
 
     @PutMapping("/edit/{id}")
@@ -63,7 +64,7 @@ public class UserController {
         log.info(usuario.toString());
         usuarioService.update(id, usuario);
         cargarDatosPagina(model);
-        return USER_VIEW;
+        return "redirect:/user";
     }
 
     void cargarDatosPagina(Model model){

@@ -3,7 +3,6 @@ package com.manuellarrota.admin.services.impl;
 import com.manuellarrota.admin.entities.Usuario;
 import com.manuellarrota.admin.repositories.UsuarioRepository;
 import com.manuellarrota.admin.services.UsuarioService;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<Usuario> findLike(String keyword) {
-        return usuarioRepository.findByNombreContaining(keyword);
+        return usuarioRepository.findByEmailContaining(keyword);
     }
 
     @Override

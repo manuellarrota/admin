@@ -42,8 +42,8 @@
             <form th:action="@{/user/edit/{id}(id=${user.id})}" method="POST">
                 <input type="hidden" name="_method" value="PUT"/>
                 <td th:text="${user.id}"></td>
-                <td><input type="text" name="user.nombre" th:value="${user.nombre}" required></td>
-                <td><input type="email" name="user.email" th:value="${user.email}" required></td>
+                <td><input type="text" name="nombre" th:value="${user.nombre}" required></td>
+                <td><input type="email" name="email" th:value="${user.email}" required></td>
                 <td>
                     <select  name="rol.id" required>
                         <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"

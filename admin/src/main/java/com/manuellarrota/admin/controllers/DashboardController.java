@@ -1,6 +1,5 @@
 package com.manuellarrota.admin.controllers;
 
-import com.manuellarrota.admin.entities.Menu;
 import com.manuellarrota.admin.services.MenuService;
 import com.manuellarrota.admin.util.MenuOption;
 import lombok.extern.slf4j.Slf4j;

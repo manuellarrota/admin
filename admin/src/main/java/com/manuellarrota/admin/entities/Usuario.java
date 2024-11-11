@@ -38,7 +38,6 @@ public class Usuario extends Domain {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", contrasena='" + contrasena + '\'' +
                 '}';
     }
 }
