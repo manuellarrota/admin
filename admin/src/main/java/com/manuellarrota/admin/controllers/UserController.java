@@ -59,8 +59,6 @@ public class UserController {
 
     @PutMapping("/edit/{id}")
     public String editarUsuario(@PathVariable Long id, @ModelAttribute User user, Model model) {
-        log.info("EDITAR USARIOO");
-        log.info(user.toString());
         userService.update(id, user);
         loadDataPage(model);
         return USER_VIEW_REDIRECT;
