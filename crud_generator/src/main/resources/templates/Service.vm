@@ -1,9 +1,0 @@
-package ${rutaPaquetes}.services;
-
-import ${rutaPaquetes}.entities.${nombreClase};
-import ${rutaPaquetes}.dtos.${nombreClase}Dto;
-import com.manu.crud_generator.utils.service.CustomCrudService;
-
-public interface ${nombreClase}Service extends CustomCrudService<${nombreClase}, ${nombreClase}Dto> {
-
-}
