@@ -1,0 +1,19 @@
+package ${rutaPaquetes}.controllers;
+
+import ${rutaPaquetes}.entities.${nombreClase};
+import ${rutaPaquetes}.services.${nombreClase}Service;
+import ${rutaPaquetes}.dtos.${nombreClase}Dto;
+import com.manu.crud_generator.utils.controller.impl.CustomCrudRestControllerImpl;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.modelmapper.ModelMapper;
+
+@Controller
+@RequestMapping(value = "${nombreClase}")
+public class ${nombreClase}Controller extends CustomCrudRestControllerImpl<${nombreClase}, ${nombreClase}Dto, ${nombreClase}Service>
+{
+
+    public ${nombreClase}Controller(${nombreClase}Service service) {
+            super(service);
+        }
+}

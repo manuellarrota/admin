@@ -31,9 +31,9 @@ public class Menu extends Domain {
             joinColumns = @JoinColumn(name = "menu_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Rol> allowedRoles = new ArrayList<>();
+    private List<Role> allowedRoles = new ArrayList<>();
 
-    public Menu(String name, String url, String icon, List<Rol> allowedRoles) {
+    public Menu(String name, String url, String icon, List<Role> allowedRoles) {
         this.name = name;
         this.url = url;
         this.icon = icon;

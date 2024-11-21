@@ -1,8 +1,8 @@
 package com.manuellarrota.admin.controllers;
 
-import com.manuellarrota.admin.entities.Rol;
+import com.manuellarrota.admin.entities.Role;
 import com.manuellarrota.admin.services.MenuService;
-import com.manuellarrota.admin.services.RolService;
+import com.manuellarrota.admin.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,55 +12,46 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/role")
 public class RolController {
 
-    private final RolService rolService;
+    private final RoleService roleService;
     private final MenuService menuService;
-
+    private static final  String ROLE_VIEW_REDIRECT = "redirect:/role";
 
     @Autowired
-    public RolController(RolService rolService, MenuService menuService) {
-        this.rolService = rolService;
+    public RolController(RoleService roleService, MenuService menuService) {
+        this.roleService = roleService;
         this.menuService = menuService;
     }
 
-    // Mostrar la página de roles con la lista de roles
     @GetMapping
     public String listRoles(Model model) {
         model.addAttribute("userMenu", menuService.findAll());
-        model.addAttribute("roleList", rolService.findAll());
+        model.addAttribute("roleList", roleService.findAll());
         return "roles";
     }
 
-    // Guardar un nuevo rol
     @PostMapping("/save")
-    public String saveRole(@ModelAttribute Rol rol) {
-        rolService.save(rol);
-        return "redirect:/role";
+    public String saveRole(@ModelAttribute Role role) {
+        roleService.save(role);
+        return ROLE_VIEW_REDIRECT;
     }
 
-    // Buscar roles
     @GetMapping("/search")
     public String searchRoles(@RequestParam String keyword, Model model) {
         model.addAttribute("userMenu", menuService.findAll());
-        model.addAttribute("roleList", rolService.findLike(keyword));
+        model.addAttribute("roleList", roleService.findLike(keyword));
         return "roles";
     }
 
-    // Editar un rol
     @PutMapping("/edit/{id}")
-    public String editRole(@PathVariable Long id, @ModelAttribute Rol rol) {
-        rolService.update(id, rol);
-        return "redirect:/role";
+    public String editRole(@PathVariable Long id, @ModelAttribute Role role) {
+        roleService.update(id, role);
+        return ROLE_VIEW_REDIRECT;
     }
 
-    // Eliminar un rol
     @GetMapping("/delete/{id}")
     public String deleteRole(@PathVariable Long id) {
-        rolService.delete(id);
-        return "redirect:/role";
+        roleService.delete(id);
+        return ROLE_VIEW_REDIRECT;
     }
 
-    void cargarDatosPagina(Model model){
-        model.addAttribute("roles", rolService.findAll());
-        model.addAttribute("userMenu", menuService.findAll());
-    }
 }

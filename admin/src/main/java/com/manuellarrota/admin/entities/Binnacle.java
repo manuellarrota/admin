@@ -9,19 +9,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
-@Table(name = "notificacion")
-public class Notificacion extends Domain {
+@Table(name = "binnacle")
+public class Binnacle extends Domain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String date;
+    private String action;
+    private String detail;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "users_id")
+    private User user;
 
-    private String mensaje;
-    private String fecha;
-    private boolean leido;
 
-    // Getters y Setters
 }

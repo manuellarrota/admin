@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
-    @Query("SELECT m FROM Menu m JOIN m.allowedRoles r WHERE r.nombre IN :roles")
+    @Query("SELECT m FROM Menu m JOIN m.allowedRoles r WHERE r.name IN :roles")
     List<Menu> findMenusByRoles(@Param("roles") List<String> roles);
 
 }

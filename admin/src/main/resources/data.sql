@@ -1,12 +1,12 @@
-INSERT INTO rol ( nombre) VALUES ('ADMIN');
-INSERT INTO rol ( nombre) VALUES ('USER');
-INSERT INTO rol ( nombre) VALUES ('CUSTOMER');
+INSERT INTO role ( name) VALUES ('ADMIN');
+INSERT INTO role ( name) VALUES ('USER');
+INSERT INTO role ( name) VALUES ('CUSTOMER');
 
 
-INSERT INTO usuario ( nombre, email, contrasena, rol_id) VALUES
-    ( 'El Admin Manu', 'admin@admin.com', '$2a$10$mlIQySVRg9ySl.XMuoL/YeZ9NcZgCIm3OF7ty/l0C.KgyLKvhj.3C', 1);
+INSERT INTO users ( name, mail, password, role_id) VALUES
+    ( 'El Admin Manu', 'admin@admin.com', '$2a$10$mlIQySVRg9ySl.XMuoL/YeZ9NcZgCIm3OF7ty/l0C.KgyLKvhj.3C', 1); -- pass: a
 
-INSERT INTO usuario ( nombre, email, contrasena, rol_id) VALUES
+INSERT INTO users ( name, mail, password, role_id) VALUES
     ( 'usuario', 'user@admin.com', '$2a$10$mlIQySVRg9ySl.XMuoL/YeZ9NcZgCIm3OF7ty/l0C.KgyLKvhj.3C', 2),
     ( 'El Usuario Manu', 'manuser@admin.com', '$2a$10$mlIQySVRg9ySl.XMuoL/YeZ9NcZgCIm3OF7ty/l0C.KgyLKvhj.3C', 2);
 

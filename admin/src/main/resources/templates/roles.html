@@ -12,8 +12,8 @@
 <!-- Crear Rol -->
 <h2>Crear Rol</h2>
 <form th:action="@{/role/save}" method="POST">
-    <label for="nombre">Nombre del Rol:</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <label for="name">Nombre del Rol:</label>
+    <input type="text" id="name" name="name" required>
     <button type="submit">Guardar</button>
 </form>
 
@@ -36,15 +36,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="rol : ${roleList}">
-        <!-- Formulario para editar cada rol -->
-        <form th:action="@{/role/edit/{id}(id=${rol.id})}" method="POST">
+    <tr th:each="role : ${roleList}">
+        <form th:action="@{/role/edit/{id}(id=${role.id})}" method="POST">
             <input type="hidden" name="_method" value="PUT"/>
-            <td th:text="${rol.id}"></td>
-            <td><input type="text" name="nombre" th:value="${rol.nombre}" required></td>
+            <td th:text="${role.id}"></td>
+            <td><input type="text" name="name" th:value="${role.name}" required></td>
             <td>
                 <button type="submit">Guardar Cambios</button>
-                <a th:href="@{/role/delete/{id}(id=${rol.id})}">Eliminar</a>
+                <a th:href="@{/role/delete/{id}(id=${role.id})}">Eliminar</a>
             </td>
         </form>
     </tr>

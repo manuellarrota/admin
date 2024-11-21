@@ -1,7 +1,7 @@
 package com.manuellarrota.admin.dtos;
 
 
-import com.manuellarrota.admin.entities.Rol;
+import com.manuellarrota.admin.entities.Role;
 import jakarta.persistence.ElementCollection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +20,6 @@ public class MenuDto {
     private String icon;
 
     @ElementCollection
-    private List<Rol> allowedRoles;
+    private List<Role> allowedRoles;
 
 }

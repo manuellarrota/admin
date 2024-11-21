@@ -31,11 +31,11 @@ public class MenuServiceImpl implements MenuService {
     public List<MenuOption> findAll() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Set<String> userRoles = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)  // Obtiene el rol con el prefijo "ROLE_"
-                .map(role -> role.replace("ROLE_", ""))  // Elimina el prefijo "ROLE_"
-                .collect(Collectors.toSet());  // Colecta los roles sin "ROLE_"
+                .map(GrantedAuthority::getAuthority)
+                .map(role -> role.replace("ROLE_", ""))
+                .collect(Collectors.toSet());
         return menuRepository.findMenusByRoles(new ArrayList<>(userRoles)).stream().map(
-                menu -> new MenuOption(menu.getName(),  menu.getUrl(), menu.getIcon() )
+                menu -> new MenuOption(menu.getId(),menu.getName(),  menu.getUrl(), menu.getIcon(), menu.getAllowedRoles())
         ).toList();
     }
 

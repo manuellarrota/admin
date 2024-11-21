@@ -5,8 +5,8 @@ import com.manu.crud_generator.repositories.BPTransactionRepository;
 import com.manu.crud_generator.services.BPTransactionService;
 import com.manu.crud_generator.dtos.BPTransactionDto;
 import com.manu.crud_generator.utils.service.impl.CustomCrudServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 @Service
 public class BPTransactionServiceImpl extends CustomCrudServiceImpl<BPTransaction, BPTransactionDto, BPTransactionRepository>

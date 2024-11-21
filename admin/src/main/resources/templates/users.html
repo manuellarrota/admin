@@ -9,15 +9,15 @@
     <div th:replace="~{fragments/navbar.html}"></div>
     <h2>Crear Usuario</h2>
     <form th:action="@{/user/save}" method="POST">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
-        <label for="rol">Rol:</label>
-        <select id="rol.id" name="rol.id" required>
-            <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="mail">Email:</label>
+        <input type="email" id="mail" name="mail" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="role">Rol:</label>
+        <select id="role.id" name="role.id" required>
+            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
         </select>
         <button type="submit">Guardar</button>
     </form>
@@ -42,12 +42,12 @@
             <form th:action="@{/user/edit/{id}(id=${user.id})}" method="POST">
                 <input type="hidden" name="_method" value="PUT"/>
                 <td th:text="${user.id}"></td>
-                <td><input type="text" name="nombre" th:value="${user.nombre}" required></td>
-                <td><input type="email" name="email" th:value="${user.email}" required></td>
+                <td><input type="text" name="name" th:value="${user.name}" required></td>
+                <td><input type="email" name="mail" th:value="${user.mail}" required></td>
                 <td>
-                    <select  name="rol.id" required>
-                        <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"
-                                th:selected="${rol.id == user.rol.id}"></option>
+                    <select  name="role.id" required>
+                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+                                th:selected="${role.id == user.role.id}"></option>
                     </select>
                 </td>
                 <td>

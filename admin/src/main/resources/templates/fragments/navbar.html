@@ -3,7 +3,7 @@
 <nav class="navbar">
     <ul>
         <th:block th:each="optionMenu : ${userMenu}">
-        <li><a th:href="@{${optionMenu.url}}" th:text="${optionMenu.label}"></a></li>
+            <li><a th:href="@{${optionMenu.url}}" th:text="${optionMenu.name}"></a></li>
         </th:block>
         <li>
             <a th:href="@{/logout}" th:text="'Cerrar sesión'"></a>

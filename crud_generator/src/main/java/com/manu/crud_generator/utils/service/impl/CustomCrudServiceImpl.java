@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class CustomCrudServiceImpl<T, DTO, R extends CustomCrudRepository<T>> implements CustomCrudService<T, DTO> {
+public class CustomCrudServiceImpl<T, D, R extends CustomCrudRepository<T>> implements CustomCrudService<T, D> {
 
     protected final R repository;
     private final ModelMapper modelMapper;
     private final Class<T> typeClassInstance;
-    private final Class<DTO> typeClassDTO;
+    private final Class<D> typeClassDTO;
     @Autowired
-    public CustomCrudServiceImpl(R repository, ModelMapper modelMapper, Class<T> typeClassInstance, Class<DTO> typeClassDTO) {
+    public CustomCrudServiceImpl(R repository, ModelMapper modelMapper, Class<T> typeClassInstance, Class<D> typeClassDTO) {
         this.repository = repository;
         this.modelMapper = modelMapper;
         this.typeClassInstance = typeClassInstance;
@@ -56,30 +56,30 @@ public class CustomCrudServiceImpl<T, DTO, R extends CustomCrudRepository<T>> im
     }
 
     @Override
-    public DTO saveDto(DTO dto) {
-        return getDto(save(getInstance(dto)));
+    public D saveDto(D d) {
+        return getDto(save(getInstance(d)));
     }
 
     @Override
-    public DTO getByIdDto(Long id) {
+    public D getByIdDto(Long id) {
         return getDto(getById(id));
     }
 
     @Override
-    public Page<DTO> getAllDto(Pageable pageable) {
-        List<DTO> listDto = new ArrayList<>();
+    public Page<D> getAllDto(Pageable pageable) {
+        List<D> listD = new ArrayList<>();
         Page<T> pagesInstance = repository.findAll(pageable);
-        pagesInstance.getContent().forEach(instance -> listDto.add(getDto(instance)));
-        return new PageImpl<>(listDto, pageable, pagesInstance.getTotalElements());
+        pagesInstance.getContent().forEach(instance -> listD.add(getDto(instance)));
+        return new PageImpl<>(listD, pageable, pagesInstance.getTotalElements());
     }
 
     @Override
-    public DTO updateDto(DTO entityDto) {
-        return saveDto(entityDto);
+    public D updateDto(D entityD) {
+        return saveDto(entityD);
     }
 
     @Override
-    public DTO getDto(T instance) {
+    public D getDto(T instance) {
         //log.info("Mapeando: " + typeClassInstance + " >> " + typeClassDTO);
         if (instance != null) {
             return modelMapper.map(instance, typeClassDTO);
@@ -88,10 +88,10 @@ public class CustomCrudServiceImpl<T, DTO, R extends CustomCrudRepository<T>> im
     }
 
     @Override
-    public T getInstance(DTO dto) {
+    public T getInstance(D d) {
         //log.info("Mapeando: " + typeClassDTO + " >> " + typeClassInstance);
-        if (dto != null) {
-            return modelMapper.map(dto, typeClassInstance);
+        if (d != null) {
+            return modelMapper.map(d, typeClassInstance);
         }
         return modelMapper.map(new Object(), typeClassInstance);
     }

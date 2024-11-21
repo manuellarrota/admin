@@ -1,19 +1,25 @@
 package com.manuellarrota.admin.util;
 
+import com.manuellarrota.admin.entities.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class MenuOption {
-    private String label;
+    private Long id;
+    private String name;
     private String url;
     private String icon;
+    private List<Role> allowedRoles;
 
-
-    public MenuOption(String label, String url, String icon) {
-        this.label = label;
+    public MenuOption(Long id, String name, String url, String icon, List<Role> allowedRoles) {
+        this.id = id;
+        this.name = name;
         this.url = url;
         this.icon = icon;
+        this.allowedRoles = allowedRoles;
     }
 }

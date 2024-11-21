@@ -31,6 +31,7 @@ public class GenerateMojo extends AbstractMojo{
         GeneratorDto generatorDto = new GeneratorDto();
         GeneratorService generatorService = new GeneratorService();
         GeneratorServiceImpl generatorServiceImpl = new GeneratorServiceImpl();
+        GeneratorCotroller generatorCotroller = new GeneratorCotroller();
 
         // Iterar sobre las clases de entidad y generar repositorios
         for (Class<?> entidad : entidades) {
@@ -47,6 +48,7 @@ public class GenerateMojo extends AbstractMojo{
             }
             generatorService.generarCodigoService(nombreClase, entidad.getPackageName());
             generatorServiceImpl.generarCodigoServiceImpl(nombreClase, entidad.getPackageName());
+            generatorCotroller.generarControllers(nombreClase, entidad.getPackageName());
         }
     }
 }

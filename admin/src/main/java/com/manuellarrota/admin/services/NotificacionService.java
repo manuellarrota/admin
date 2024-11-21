@@ -1,15 +1,15 @@
 package com.manuellarrota.admin.services;
 
-import com.manuellarrota.admin.entities.Notificacion;
+import com.manuellarrota.admin.entities.Notification;
 
 import java.util.List;
 
 public interface NotificacionService {
-    List<Notificacion> findAll();
+    List<Notification> findAll();
 
-    Notificacion findById(Long id);
+    Notification findById(Long id);
 
-    Notificacion save(Notificacion notificacion);
+    Notification save(Notification notification);
 
     void delete(Long id);
 }

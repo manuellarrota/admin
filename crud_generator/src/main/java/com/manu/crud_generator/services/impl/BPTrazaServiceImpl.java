@@ -5,8 +5,8 @@ import com.manu.crud_generator.repositories.BPTrazaRepository;
 import com.manu.crud_generator.services.BPTrazaService;
 import com.manu.crud_generator.dtos.BPTrazaDto;
 import com.manu.crud_generator.utils.service.impl.CustomCrudServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 @Service
 public class BPTrazaServiceImpl extends CustomCrudServiceImpl<BPTraza, BPTrazaDto, BPTrazaRepository>

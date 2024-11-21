@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menús</title>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar.html}"></div>
+
+<!-- Crear Menu -->
+<h2>Crear Menú</h2>
+<form th:action="@{/menu/save}" method="POST">
+    <label for="name">Nombre del Menú:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="url">URL:</label>
+    <input type="text" id="url" name="url" required>
+    
+    <label for="icon">Ícono:</label>
+    <input type="text" id="icon" name="icon">
+    
+    <label for="allowedRoles">Roles Permitidos:</label>
+    <select id="allowedRoles" name="allowedRoles" multiple required>
+        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.nombre}"></option>
+    </select>
+    
+    <button type="submit">Guardar</button>
+</form>
+
+<!-- Lista de Menús -->
+<h2>Lista de Menús</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>URL</th>
+        <th>Ícono</th>
+        <th>Roles Permitidos</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="menu : ${menuList}">
+        <!-- Formulario para editar cada menú -->
+        <form th:action="@{/menu/edit/{id}(id=${menu.id})}" method="POST">
+            <input type="hidden" name="_method" value="PUT"/>
+            <td th:text="${menu.id}"></td>
+            <td><input type="text" name="name" th:value="${menu.name}" required></td>
+            <td><input type="text" name="url" th:value="${menu.url}" required></td>
+            <td><input type="text" name="icon" th:value="${menu.icon}"></td>
+            <td>
+                <select name="allowedRoles" multiple required>
+                    <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"
+                            th:selected="${menu.allowedRoles.contains(role)}"></option>
+                </select>
+            </td>
+            <td>
+                <button type="submit">Guardar Cambios</button>
+                <a th:href="@{/menu/delete/{id}(id=${menu.id})}">Eliminar</a>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer.html}"></div>
+</body>
+</html>

@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
 @Slf4j
-public class CustomCrudRestControllerImpl<T, DTO, S extends CustomCrudService<T,DTO>> implements CustomCrudRestController<T, DTO, S> {
+public class CustomCrudRestControllerImpl<T, D, S extends CustomCrudService<T, D>> implements CustomCrudRestController<T, D, S> {
 
     final S service;
 
@@ -24,55 +24,55 @@ public class CustomCrudRestControllerImpl<T, DTO, S extends CustomCrudService<T,
 
 
     @Override
-    public ResponseEntity<DTO> save(DTO dto, BindingResult result) throws GenericErrorDto {
-        log.info("Save " + dto);
+    public ResponseEntity<D> save(D d, BindingResult result) throws GenericErrorDto {
+        log.info("Save " + d);
         if (result.hasErrors()) {
             log.error(result.toString());
-            return (ResponseEntity<DTO>) ResponseEntity.badRequest();
+            return (ResponseEntity<D>) ResponseEntity.badRequest();
         }
         try {
-            dto = service.saveDto(dto);
+            d = service.saveDto(d);
         } catch (Exception|Error e) {
             log.error(e.toString());
-            return (ResponseEntity<DTO>) ResponseEntity.unprocessableEntity();
+            return (ResponseEntity<D>) ResponseEntity.unprocessableEntity();
         }
-        log.info("Saved " + dto);
-        return ResponseEntity.ok(dto);
+        log.info("Saved " + d);
+        return ResponseEntity.ok(d);
     }
 
     @Override
-    public ResponseEntity<DTO> get(Long id, BindingResult result) throws GenericErrorDto {
-        DTO dtoResponse;
+    public ResponseEntity<D> get(Long id, BindingResult result) throws GenericErrorDto {
+        D dResponse;
         try{
-            dtoResponse = service.getByIdDto(id);
+            dResponse = service.getByIdDto(id);
         }catch (Exception|Error e) {
             log.error(e.toString());
-            return (ResponseEntity<DTO>) ResponseEntity.unprocessableEntity();
+            return (ResponseEntity<D>) ResponseEntity.unprocessableEntity();
         }
-        return ResponseEntity.ok(dtoResponse);
+        return ResponseEntity.ok(dResponse);
     }
 
 
     @Override
-    public ResponseEntity<Page<DTO>> getAll(Pageable pageable) throws GenericErrorDto {
+    public ResponseEntity<Page<D>> getAll(Pageable pageable) throws GenericErrorDto {
         return ResponseEntity.ok(service.getAllDto(pageable));
     }
 
     @Override
-    public ResponseEntity<DTO> update(DTO dto, BindingResult result) throws GenericErrorDto {
-        log.info("Update " + dto);
+    public ResponseEntity<D> update(D d, BindingResult result) throws GenericErrorDto {
+        log.info("Update " + d);
         if (result.hasErrors()) {
             log.error(result.toString());
-            return (ResponseEntity<DTO>) ResponseEntity.badRequest();
+            return (ResponseEntity<D>) ResponseEntity.badRequest();
         }
         try {
-            dto = service.updateDto(dto);
+            d = service.updateDto(d);
         } catch (Exception|Error e) {
             log.error(e.toString());
-            return (ResponseEntity<DTO>) ResponseEntity.unprocessableEntity();
+            return (ResponseEntity<D>) ResponseEntity.unprocessableEntity();
         }
-        log.info("Updated " + dto);
-        return  ResponseEntity.ok(dto);
+        log.info("Updated " + d);
+        return  ResponseEntity.ok(d);
     }
 
     @Override
